@@ -29,19 +29,21 @@ void registrarEstudianteMenu(ServicioPrestamoTablets* servicio) {
     int codigo;
     string nombre;
     cout << "Ingrese el codigo del estudiante: "; cin >> codigo;
-    cout << "Ingrese el nombre del estudiante: "; cin >> nombre;
+    cout << "Ingrese el nombre del estudiante: "; getline(cin>>ws, nombre);
     Estudiante* estudianteX = new Estudiante(codigo, nombre);
 	servicio->registrarEstudiante(estudianteX);
-	delete estudianteX;
+	
+	
 
 }
 void registrarTabletMenu(ServicioPrestamoTablets* servicio) {
     
     string modelo;
-    cout << "Ingrese el modelo de la tablet: "; cin >> modelo;
+    cout << "Ingrese el modelo de la tablet: "; getline(cin>>ws, modelo);
     Tablet* tabletX = new Tablet(modelo);
     servicio->registrarTablet(tabletX);
-	delete tabletX;
+	
+	
 
 }
 void registrarPrestamoMenu(ServicioPrestamoTablets* servicio) {
@@ -51,12 +53,12 @@ void registrarPrestamoMenu(ServicioPrestamoTablets* servicio) {
 	string fechaInicio;
 	string fechaFin;
     cout << "Ingrese el codigo de estudiante: "; cin >> codigoEstudiante;
-    cout << "Ingrese el modelo de la tablet: "; cin >> modeloTablet;
-    cout << "Ingrese la fecha de inicio: "; cin >> fechaInicio;
-    cout << "Ingrese la fecha de fin: "; cin >> fechaFin;
+    cout << "Ingrese el modelo de la tablet: "; getline(cin >> ws, modeloTablet);
+    cout << "Ingrese la fecha de inicio: "; getline(cin >> ws, fechaInicio);
+    cout << "Ingrese la fecha de fin: "; getline(cin >> ws, fechaFin);
     Prestamo* prestamoX = new Prestamo(servicio->obtenerEstudiantePorCodigo(codigoEstudiante), servicio->obtenerTabletPorModelo(modeloTablet), fechaInicio, fechaFin);
     servicio->registrarPrestamo(prestamoX);
-	delete prestamoX;
+	
 
 }
 void listarEstudiantesMenu(ServicioPrestamoTablets* servicio) {
@@ -85,6 +87,7 @@ int main() {
     //TODO: Un menu de opcion | listar todos los estudiantes | listar todos los prestamos | listar todas tablets
     do
     {
+        system("cls");
         menu(op);
         switch (op)
         {
@@ -95,15 +98,18 @@ int main() {
         case 5: listarPrestamosPorEstudianteMenu(servicio); break;
         case 6: listarTodosPrestamosMenu(servicio); break;
         case 7: listarTabletsMenu(servicio); break;
+        case 0: salir = false; break;
         default:
-            salir = false;
+         
             break;
         }
+        system("pause");
     } while (salir);
 
-    servicio->deleteAll();
+    
+    
     delete servicio;
-    system("pause>0");
+    system("pause");
     return 0;
 }
 

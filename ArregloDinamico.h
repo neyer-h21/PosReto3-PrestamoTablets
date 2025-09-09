@@ -24,6 +24,10 @@ class ArregloDinamico {
             arreglo = nuevoArr;
             tam = nuevoTam;
         }
+        if (arreglo == nullptr ) {
+            arreglo = new T[nuevoTam];
+            tam = nuevoTam;
+        }
         
     }
 
@@ -32,8 +36,26 @@ public:
     ~ArregloDinamico() { delete[] arreglo; }
 
     void agregar(const T& elemento) {
-        if (n >= tam) redimensionar(tam < 2 ? 2 : tam * 2);
-        arreglo[n++] = elemento;
+        if (tam == 0)
+        {
+            redimensionar(2);
+            arreglo[0] = elemento;
+            n++;
+
+        }
+        else if (n >= tam)
+        {
+            redimensionar(tam * 2);
+            arreglo[n] = elemento;
+            n++;
+        }
+        else
+        {
+            arreglo[n] = elemento;
+            n++;
+        }
+        
+        
     }
 
    /* void listar() const {

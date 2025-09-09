@@ -25,6 +25,6 @@ public:
 	void listarPrestamosTotal();
 	Estudiante* obtenerEstudiantePorCodigo(int codigo);
 	Tablet* obtenerTabletPorModelo(string modelo);
-	void deleteAll();
+	
 
 };

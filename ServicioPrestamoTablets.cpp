@@ -75,48 +75,79 @@ void ServicioPrestamoTablets::listarPrestamosPorEstudiante(int codigoEstudiante)
 
 			//imprimir los prestamos realizados - tablet modelo
 			Tablet* t = prestamos[i].getTablet();
-			cout << "Reporte de prestamos solicitados por estudiante" << endl;
+			cout << "\tReporte de prestamos solicitados por estudiante" << endl;
 			cout << "==========================================" << endl;
 			cout << "Estudiante: " << e->getNombre() << endl;
 			cout << "Fecha Inicio: " << prestamos[i].getFechaInicio() << endl;
 			cout << "Fecha Fin: " << prestamos[i].getFechaFin() << endl;
 			cout << "Tablet: " << t->getModelo() << endl;
 		}
+		else
+		{
+			cout << "\t ****    El estudiante no tiene prestamos registrados    **** " << endl;
+		}
 	}
 }
 
 void ServicioPrestamoTablets::listarPrestamosTotal() {
-	for (int i = 0; i < prestamos.size(); i++)
+	if (prestamos.size() > 0)
 	{
-		cout << "==========================================" << endl;
-		cout << "\tPrestamo" << i + 1 << endl;
-		cout << "Estudiante: " << prestamos[i].getEstudiante()->getNombre() << endl;
-		cout << "Codigo de Estudiante: " << prestamos[i].getEstudiante()->getCodigoEstudiante() << endl;
-		cout << "Fecha Inicio: " << prestamos[i].getFechaInicio() << endl;
-		cout << "Fecha Fin: " << prestamos[i].getFechaFin() << endl;
-		cout << "Tablet: " << prestamos[i].getTablet()->getModelo() << endl;
+		cout << endl << "\t PRESTAMOS TOTALES" << endl;
+		for (int i = 0; i < prestamos.size(); i++)
+		{
+			cout << "==========================================" << endl;
+			cout << "\tPrestamo" << i + 1 << endl;
+			cout << "Estudiante: " << prestamos[i].getEstudiante()->getNombre() << endl;
+			cout << "Codigo de Estudiante: " << prestamos[i].getEstudiante()->getCodigoEstudiante() << endl;
+			cout << "Fecha Inicio: " << prestamos[i].getFechaInicio() << endl;
+			cout << "Fecha Fin: " << prestamos[i].getFechaFin() << endl;
+			cout << "Tablet: " << prestamos[i].getTablet()->getModelo() << endl;
+		}
 	}
+	else
+	{
+		cout << "\t ***   No hay prestamos registrados    ***" << endl;
+	}
+	
 }
 
 void ServicioPrestamoTablets::listarEstudiantes() {
-	for (int i = 0; i < estudiantes.size(); i++)
+	if (estudiantes.size()>0)
 	{
-		cout << "Listado de todos los estudiantes" << endl;
-		cout << "==========================================" << endl;
-		cout << "Codigo:" << estudiantes[i].getCodigoEstudiante() << endl;
-		cout << "Nombre:" << estudiantes[i].getNombre() << endl;
+		cout << endl << "\tLISTADO DE TODOS LOS ESTUDIANTES" << endl;
+
+		for (int i = 0; i < estudiantes.size(); i++)
+		{
+			cout << "==========================================" << endl;
+			cout << "Codigo:" << estudiantes[i].getCodigoEstudiante() << endl;
+			cout << "Nombre:" << estudiantes[i].getNombre() << endl;
+		}
 	}
+	else
+	{
+		cout << "\t ***   No hay estudiantes registrados    ***" << endl;
+	}
+	
 }
 
 void ServicioPrestamoTablets::listarTablets() {
-	for (int i = 0; i < tablets.size(); i++)
+	if (tablets.size() > 0)
 	{
-		cout << "Listado de tablets" << endl;
-		cout << "==========================================" << endl;
-		cout << "Modelo:" << tablets[i].getModelo() << endl;
-		cout << "Estado:" << tablets[i].getEstado() << endl;
-		
+		cout << endl << "\t LISTADO DE TABLETS REGISTRADOS" << endl;
+
+		for (int i = 0; i < tablets.size(); i++)
+		{
+			cout << "==========================================" << endl;
+			cout << "Modelo:" << tablets[i].getModelo() << endl;
+			cout << "Estado:" << tablets[i].getEstado() << endl;
+
+		}
 	}
+	else
+	{
+		cout << "\t ***   No hay tablets registrados    ***" << endl;
+	}
+	
 }
 Estudiante* ServicioPrestamoTablets::obtenerEstudiantePorCodigo(int codigo) {
 	int pos = obtenerPosEstuCodigo(codigo);
@@ -131,10 +162,4 @@ Tablet* ServicioPrestamoTablets::obtenerTabletPorModelo(string modelo) {
 		return &tablets[pos];
 	}
 	return nullptr;
-}
-void ServicioPrestamoTablets::deleteAll() {
-
-	delete[] & estudiantes;
-	delete[] & tablets;
-	delete[] & prestamos;
 }
